@@ -28,26 +28,28 @@ the before/after accuracy number for the project.
 
 ## Setup
 
-**1. Install PostgreSQL locally** (no Docker needed):
-- Ubuntu/Debian: `sudo apt install postgresql`
-- macOS: `brew install postgresql@16 && brew services start postgresql@16`
-- Windows: use the installer from postgresql.org
-
-**2. Create the database and tables:**
+**1. Start PostgreSQL in a container** (needs Docker Desktop or the Docker engine installed):
 ```bash
-createdb clarifysql
-psql clarifysql -f schema.sql
+docker compose up -d
 ```
+This runs just the database — the Python code all runs normally on your
+machine and connects to it over `localhost:5432`.
 
-**3. Install Python dependencies:**
+**2. Install Python dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-**4. Set up your `.env` file:**
+**3. Set up your `.env` file:**
 ```bash
 cp .env.example .env
-# fill in your DB password and a free Groq API key from console.groq.com
+# the DB values already match docker-compose.yml — just add a free
+# Groq API key from console.groq.com
+```
+
+**4. Create the tables:**
+```bash
+python init_db.py
 ```
 
 **5. Add sample data:**
@@ -64,6 +66,9 @@ python main.py
 ```bash
 python evaluate.py
 ```
+
+To stop the database later: `docker compose down` (add `-v` too if you
+want to wipe the data and start fresh next time).
 
 ## Example
 
