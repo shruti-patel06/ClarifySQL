@@ -36,7 +36,7 @@ Respond with ONLY valid JSON in this exact shape, nothing else:
 
 def generate_sql(question: str) -> SQLResult:
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": question},
