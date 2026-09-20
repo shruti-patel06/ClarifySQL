@@ -36,7 +36,7 @@ Respond with ONLY valid JSON in this exact shape, nothing else:
 
 def generate_sql(question: str) -> SQLResult:
     response = client.chat.completions.create(
-        model="qwen/qwen3.6-27b",
+        model="qwen/qwen3.8-27b",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": question},
