@@ -12,7 +12,8 @@ before generating the SQL.
 1. `ambiguity_checker.py` scans the question for words like "best", "top",
    or "recent" that are known to have more than one reasonable meaning for
    this schema.
-2. If one is found, `main.py` asks the user to pick which meaning they want.
+2. If one is found, the app asks the user to pick which meaning they want
+   (`main.py` for the terminal version, `app.py` for the web version).
 3. `sql_generator.py` sends the (possibly clarified) question plus the table
    schema to an LLM and asks it to return the SQL as JSON, which is parsed
    into a `SQLResult` with Pydantic so a malformed response fails loudly
@@ -58,9 +59,15 @@ python seed_data.py
 ```
 
 **6. Run it:**
-```bash
-python main.py
-```
+- Terminal version:
+  ```bash
+  python main.py
+  ```
+- Web version:
+  ```bash
+  streamlit run app.py
+  ```
+  opens the app in your browser at `http://localhost:8501`.
 
 **7. See the accuracy comparison:**
 ```bash
